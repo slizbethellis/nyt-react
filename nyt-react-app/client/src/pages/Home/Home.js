@@ -3,8 +3,8 @@ import Jumbotron from "../../components/Jumbotron";
 import DeleteBtn from "../../components/DeleteBtn";
 import { Col, Row, Container } from "../../components/Grid";
 import { Card, CardHeader, CardBody } from "../../components/Card";
-import { List, ListItem } from "../../components/List";
-import { Input, Label, Select, SelectItem, FormBtn } from "../../components/Form";
+import { List, ListBtn, ListItem } from "../../components/List";
+import { Input, Label, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 
 class Home extends Component {
@@ -12,9 +12,18 @@ class Home extends Component {
   state = {
     articles: [],
     topic: "",
-    numToRetrieve: "",
     startYear: "",
     endYear: ""
+  };
+
+  // saves article to database
+  saveArticle = index => {
+    API.saveArticle({
+      title: this.state.articles[index].headline.main,
+      blurb: this.state.articles[index].snippet,
+      date: this.state.articles[index].pub_date,
+      url: this.state.articles[index].web_url
+    }).then(res => alert("Article saved to database!")).catch(err => console.log(err));
   };
 
   // Handles updating component state when the user types into the input field
@@ -25,11 +34,19 @@ class Home extends Component {
     });
   };
 
-  // When the form is submitted, use the API.saveBook method to save the book data
-  // Then reload books from the database
+  // When the form is submitted, use the API.searchArticles method to find articles
+  // Then load articles from the database
   handleFormSubmit = event => {
     event.preventDefault();
-    return "nothing";
+    if (this.state.topic) {
+      API.searchArticles({
+        topic: this.state.topic,
+        startYear: this.state.startYear,
+        endYear: this.state.endYear
+      })
+        .then(res => this.setState({ articles: res.data.response.docs, topic: "", startYear: "", endYear: "" }))
+        .catch(err => console.log(err));
+    }
   };
 
   render() {
@@ -52,16 +69,6 @@ class Home extends Component {
                     name="topic"
                     placeholder="Topic (required)"
                   />
-                  <Label>Number of Articles to Retrieve</Label>
-                  <Select
-                    value={this.state.numToRetrieve}
-                    onChange={this.handleInputChange}
-                    name="numToRetrieve"
-                  >
-                    <SelectItem>1</SelectItem>
-                    <SelectItem>5</SelectItem>
-                    <SelectItem>10</SelectItem>
-                  </Select>
                   <Label>Start Year (optional)</Label>
                   <Input
                     value={this.state.startYear}
@@ -73,7 +80,7 @@ class Home extends Component {
                   <Input
                     value={this.state.endYear}
                     onChange={this.handleInputChange}
-                    name="startYear"
+                    name="endYear"
                     placeholder="End Year"
                   />
                   <FormBtn
@@ -94,14 +101,15 @@ class Home extends Component {
               <CardBody>
                 {this.state.articles.length ? (
                   <List>
-                    {this.state.articles.map(article => {
+                    {this.state.articles.map((article, index) => {
                       return (
-                        <ListItem key={article._id}>
-                          <a href={article.url}>
-                            <strong>{article.title}</strong>
-                            <p className="text-muted">{article.date}</p>
+                        <ListItem key={index}>
+                          <a href={article.web_url}>
+                            <strong>{article.headline.main}</strong>
                           </a>
-                          <DeleteBtn/>
+                          <p>{article.snippet}</p>
+                          <p className="small text-muted">{article.pub_date}</p>
+                          <ListBtn onClick={() => this.saveArticle(index)}>Save Article</ListBtn>
                         </ListItem>
                       );
                     })}
