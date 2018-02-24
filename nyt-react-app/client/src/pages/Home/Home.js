@@ -94,7 +94,7 @@ class Home extends Component {
               <CardBody>
                 {this.state.articles.length ? (
                   <List>
-                    {this.state.articles.map(book => {
+                    {this.state.articles.map(article => {
                       return (
                         <ListItem key={article._id}>
                           <a href={article.url}>
@@ -107,7 +107,7 @@ class Home extends Component {
                     })}
                   </List>
                 ) : (
-                    <h3>No Results to Display</h3>
+                    <h5>No Results to Display</h5>
                   )}
               </CardBody>
             </Card>

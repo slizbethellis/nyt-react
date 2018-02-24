@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 //import API from "../../utils/API";
 
-class Home extends Component {
+class Saved extends Component {
   render() {
     return (
       <div>
