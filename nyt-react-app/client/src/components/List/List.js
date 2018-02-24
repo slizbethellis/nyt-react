@@ -3,7 +3,7 @@ import React from "react";
 
 export const List = ({ children }) => {
   return (
-    <div className="list-overflow-container">
+    <div className="list-overflow-container bg-secondary">
       <ul className="list-group">
         {children}
       </ul>

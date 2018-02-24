@@ -3,7 +3,7 @@ import React from "react";
 
 const DeleteBtn = props => (
   <span className="delete-btn" {...props} style={{ float: "right", marginBottom: 10 }}>
-    ✗
+    &times;
   </span>
 );
 
