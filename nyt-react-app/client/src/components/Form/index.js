@@ -1,3 +1,5 @@
 export * from "./Input";
-export * from "./TextArea";
+export * from "./Label";
+export * from "./Select";
+export * from "./SelectItem";
 export * from "./FormBtn";
