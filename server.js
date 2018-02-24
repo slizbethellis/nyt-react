@@ -12,10 +12,11 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+else {
+  app.use(express.static("client/public"));
+}
 // Add routes, both API and view
 app.use(routes);
-
-app.use(express.static("client"));
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;

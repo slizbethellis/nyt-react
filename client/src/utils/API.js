@@ -5,7 +5,6 @@ export default {
   // Finds articles from NYT api
   searchArticles: function(topic, startYear, endYear) {
     const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${authKey}&q=${topic}${startYear && endYear ? `&begin_date=${startYear}0101&end_date=${endYear}0101` : ""}`;
-    console.log(queryURL);
     return axios.get(queryURL);
   },
   // Gets all saved articles
