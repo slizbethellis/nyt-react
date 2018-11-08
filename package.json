@@ -22,6 +22,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "hoek": "^6.0.2",
-    "mongoose": "^5.3.10"
+    "merge-descriptors": "^1.0.1",
+    "mongoose": "^5.3.10",
+    "url-parse-lax": "^3.0.0"
   }
 }
