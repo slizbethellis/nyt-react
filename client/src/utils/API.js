@@ -1,10 +1,10 @@
 import axios from "axios";
-const authKey = "f6fd9de0d4cd47c39eb5dd2d264a1730";
+const authKey = process.env.REACT_APP_NYT_KEY;
 
 export default {
   // Finds articles from NYT api
   searchArticles: function(topic, startYear, endYear) {
-    const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${authKey}&q=${topic}${startYear && endYear ? `&begin_date=${startYear}0101&end_date=${endYear}0101` : ""}`;
+    const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?${startYear && endYear ? `&begin_date=${startYear}0101&end_date=${endYear}1231` : ""}&q=${topic}&api-key=${authKey}`;
     return axios.get(queryURL);
   },
   // Gets all saved articles

@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Saved from "./pages/Saved";
 import Nav from "./components/Nav";
 
+// load environment variables from .env
+require('dotenv').config();
+
 const App = () =>
   <Router>
     <div>
