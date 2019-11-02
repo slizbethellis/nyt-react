@@ -27,7 +27,7 @@
     "express": "^4.16.4",
     "hoek": "^6.1.2",
     "merge-descriptors": "^1.0.1",
-    "mongoose": "^5.4.11",
+    "mongoose": "^5.7.5",
     "url-parse-lax": "^3.0.0"
   }
 }
